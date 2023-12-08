@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     "comments",
 
+    "captcha",
+
 ]
 
 MIDDLEWARE = [
@@ -119,8 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RECAPTCHA_PUBLIC_KEY = "6LfN5SgpAAAAAFZbgZnN5R2tqjj48wPfDQ0Utzqi"
+RECAPTCHA_PRIVATE_KEY = "6LfN5SgpAAAAACWYwTnFWs9pB1cGP-EVpHGlg_6O"

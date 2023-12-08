@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Comment
 from .forms import CommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 from PIL import Image
 import os
 
@@ -31,8 +32,14 @@ def add_comment(request, parent_comment_id=None):
             comment = form.save(commit=False)
             comment.parent_comment = parent_comment
             comment.save()
-            return redirect('comment_list')
+
+            # Вернуть JSON-ответ с информацией об успехе
+            return JsonResponse({'success': True})
+        else:
+            # Вернуть JSON-ответ с информацией об ошибках валидации формы
+            return JsonResponse({'success': False, 'errors': form.errors})
     else:
         form = CommentForm()
 
     return render(request, 'comments/add_comment.html', {'form': form})
+
